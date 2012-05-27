@@ -1,0 +1,35 @@
+// This is called when the page changes
+<html>
+	<head>
+		<script type="text/javascript" src="commonutil.js"></script>
+		<script>
+			var VIEWED = "viewed";
+			var SAVED = "saved";
+			var LSP = "mlsext_";	//local store prefix
+
+			function checkForValidUrl(tabId, changeInfo, tab) {
+				if (tab.url.indexOf("www.realtor.ca") > -1) {
+					chrome.pageAction.show(tabId);
+				}
+			}
+
+			function getPidStatus(request, sender, sendResponse) {
+				var pid = request.viewing;
+
+				var pidStatus = localStorage[LSP+pid];
+				if (pidStatus == null) {
+					saveStatus(pid, VIEWED);
+					sendResponse({status: "new"});
+				} else if (pidStatus == VIEWED) {
+					sendResponse({status: VIEWED});
+				} else if (pidStatus == SAVED) {
+					//$("#saveBtn").button('loading');
+					sendResponse({status: SAVED});
+				}
+			}
+
+			chrome.extension.onRequest.addListener(getPidStatus);
+			chrome.tabs.onUpdated.addListener(checkForValidUrl);
+		</script>
+	</head>
+</html>

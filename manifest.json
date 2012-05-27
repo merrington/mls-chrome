@@ -1,0 +1,20 @@
+{
+	"name": "MLS Extension",
+	"version": "1.0",
+	"description": "Extension for keeping track of viewed MLS pages",
+	"background": { 
+		"page": "background.html"
+	},
+	"content_scripts": [{
+		"matches": ["http://www.realtor.ca/propertyDetails.aspx?*"],
+		"js": ["jquery.min.js", "bootstrap.min.js", "propertyDetails.js"]
+	}],
+	"page_action": {
+		"default_icon": "icons/foo.png",
+		"default_title": "Mark page",
+		"default_popup": "popup.html"
+	},
+	"permissions": [
+		"tabs"
+	]
+}
