@@ -10,7 +10,6 @@ Easily keep track of properties you've looked at and are interested in.
 
 ## Todo
 - ~~Implement~~ Improve "view saved" functionality
-- Update the icon
 - Make changes to the search page
 	- Similar to property details page - grey out the viewed results
 	- Highlight saved results

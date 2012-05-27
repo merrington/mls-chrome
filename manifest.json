@@ -10,11 +10,16 @@
 		"js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "propertyDetails.js", "commonutil.js"]
 	}],
 	"page_action": {
-		"default_icon": "img/foo.png",
+		"default_icon": "img/icon16.png",
 		"default_title": "Mark page",
 		"default_popup": "popup.html"
 	},
 	"permissions": [
 		"tabs"
-	]
+	],
+	"icons": { 
+		"16": "img/icon16.png",
+		"48": "img/icon48.png",
+		"128": "img/icon128.png"
+	}
 }

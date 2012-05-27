@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<script type="text/javascript" src="lib/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/bootstrap.min.js"></script>
+		<script type="text/javascript" src="commonutil.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<script type="text/javascript">
+			var SAVED = "saved";
+			var VIEWED = "viewed";
+			var LSP = "mlsext_";	//local store prefix
+			var propertyDetailsUrl = "http://www.realtor.ca/propertyDetails.aspx?propertyId=";
+
+			$(function() {
+				var keys = JSON.parse(window.localStorage.getItem(LSP));
+				for (property in keys) {
+					var pid = keys[property];
+					//is it a saved property?
+					var prop = window.localStorage.getItem(LSP+pid);
+					if (prop == SAVED)
+						addPropertyToTable(pid);				
+				}
+			});
+
+			function addPropertyToTable(pid) {
+				var url = propertyDetailsUrl+pid;
+				$("#propertyTable").append("<tr id=\"row_"+pid+"\"><td><a href=\""+url+"\">"+url+"</a></td><td><button id=\"delete_"+pid+"\" class=\"btn btn-inverse btn-mini\"><i class=\"icon-trash icon-white\"></i> Delete</button></td></tr>");
+				$("#delete_"+pid).click(function() {
+					saveStatus(pid, VIEWED);
+					$("#row_"+pid).remove();
+				})
+			}
+
+		</script>
+	</head>
+	<body>
+		<h2>Property List</h2>
+		<table id="propertyTable">
+
+		</table>
+	</body>
+</html>
