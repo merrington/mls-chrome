@@ -10,7 +10,9 @@ Easily keep track of properties you've looked at. Properties you have viewed pre
 - Make changes to the search page
 	- Similar to property details page - grey out the viewed results
 	- Highlight saved results
-	- Eventually... possibility to remove viewed results?
+- Eventually... ?
+	- More changes to search results page - remove search results already viewed
+	- Web-based storage? (Sync across browsers)
 
 ## Uses
 - [jQuery](www.jquery.com)
