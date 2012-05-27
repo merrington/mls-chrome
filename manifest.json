@@ -10,7 +10,7 @@
 		"js": ["jquery.min.js", "bootstrap.min.js", "propertyDetails.js"]
 	}],
 	"page_action": {
-		"default_icon": "icons/foo.png",
+		"default_icon": "img/foo.png",
 		"default_title": "Mark page",
 		"default_popup": "popup.html"
 	},
