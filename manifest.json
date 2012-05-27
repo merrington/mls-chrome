@@ -7,7 +7,7 @@
 	},
 	"content_scripts": [{
 		"matches": ["http://www.realtor.ca/propertyDetails.aspx?*"],
-		"js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "propertyDetails.js"]
+		"js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "propertyDetails.js", "commonutil.js"]
 	}],
 	"page_action": {
 		"default_icon": "img/foo.png",

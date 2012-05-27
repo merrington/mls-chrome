@@ -2,10 +2,26 @@
 <html>
 	<head>
 		<script type="text/javascript" src="commonutil.js"></script>
+		<script type="text/javascript" src="lib/jquery.min.js"></script>
 		<script>
 			var VIEWED = "viewed";
 			var SAVED = "saved";
 			var LSP = "mlsext_";	//local store prefix
+
+			$(function() {
+				checkKeysExist();
+
+				function checkKeysExist() {
+					var keys = localStorage.getItem(LSP);
+
+					//var keys = JSON.parse(localStorage.getItem(LSP));
+					if (keys == null) {
+						keys = [];
+						localStorage.setItem(LSP, JSON.stringify(keys));
+					}
+				}
+
+			});
 
 			function checkForValidUrl(tabId, changeInfo, tab) {
 				if (tab.url.indexOf("www.realtor.ca") > -1) {

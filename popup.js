@@ -2,11 +2,9 @@ var SAVED = "saved";
 var VIEWED = "viewed";
 var LSP = "mlsext_";	//local store prefix
 var pid = "";
-var tab = "";
 
 chrome.tabs.getSelected(null, function(currentTab) {
 	setPid(currentTab.url);
-	tab = currentTab;
 });
 
 function setPid(url) {
@@ -22,18 +20,17 @@ function setPid(url) {
 	$("#deleteBtn").click(function() {
 		toggleButtons(VIEWED);
 		saveStatus(pid, VIEWED);
-	})
-
-	chrome.extension.sendRequest({viewing: pid}, function(response) {
-		toggleButtons(response.status)
 	});
+
+	var status = getStatus(pid);
+	toggleButtons(status);
 }
 
 function toggleButtons(status) {
 	if (status == SAVED) {
 		$("#saveBtn").button('loading');
 		$("#deleteBtn").button('reset');
-	} else if (status == VIEWED) {
+	} else {
 		$("#saveBtn").button('reset');
 		$("#deleteBtn").button('loading');
 	}
