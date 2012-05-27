@@ -4,20 +4,18 @@ var LSP = "mlsext_";
 
 function saveStatus(pid, status) {
 	//update the keys with this property
-	var keys = JSON.parse(localStorage.getItem(LSP));
+	var keys = JSON.parse(window.localStorage.getItem(LSP));
 	//check if this property already exists
 	if (jQuery.inArray(pid, keys) == -1) {
-		//var obj = {};
-		//obj["pid"] = pid;
 		keys.push(pid);
-		console.log("stringify: "+JSON.stringify(keys));
-		localStorage.setItem(LSP, JSON.stringify(keys));
+		window.localStorage.setItem(LSP, JSON.stringify(keys));
 	}
 
-	if (status == SAVED)
-		localStorage.setItem(LSP.concat(pid), status);
+	if (status == SAVED) {
+		window.localStorage.setItem((LSP + pid), status);
+	}
 	else if (status == VIEWED)
-		localStorage.removeItem(LSP.concat(pid));
+		window.localStorage.removeItem(LSP + pid);
 
 	chrome.tabs.getSelected(null, function(tab) {
 		chrome.tabs.sendRequest(tab.id, {newStatus: status});	//don't send any response to this, all scripts need to get this update
@@ -29,7 +27,7 @@ function saveStatus(pid, status) {
 }
 
 function getStatus(pid) {
-	return localStorage.getItem(LSP.concat(pid));
+	return window.localStorage.getItem(LSP+pid);
 }
 
 /*

@@ -6,6 +6,8 @@ $(function() {
 	var action = $("#frmMain").attr("action");
 	var pidStart = action.indexOf("=")+1;
 	var pidStop = action.indexOf("&");
+	if (pidStop == -1)
+		pidStop = action.length;
 	action = action.slice(pidStart, pidStop);
 
 	//send this to the background script(?) so that it gets saved

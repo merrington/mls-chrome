@@ -22,6 +22,10 @@ function setPid(url) {
 		saveStatus(pid, VIEWED);
 	});
 
+	$("#viewBtn").click(function() {
+		chrome.tabs.create({"url" :chrome.extension.getURL("listSaved.html")});
+	});
+
 	var status = getStatus(pid);
 	toggleButtons(status);
 }

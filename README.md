@@ -1,5 +1,10 @@
 # MLS.ca Google Chrome Extension
-Easily keep track of properties you've looked at. Properties you have viewed previously will be slightly greyed-out. Save properties you are interested in.
+Easily keep track of properties you've looked at and are interested in.
+
+## Features
+- Properties you have viewed previously will be slightly greyed-out
+- Save properties you are interested in
+- View a list of the properties you have saved
 
 ### More features coming soon!
 

@@ -12,12 +12,12 @@
 				checkKeysExist();
 
 				function checkKeysExist() {
-					var keys = localStorage.getItem(LSP);
+					var keys = window.localStorage.getItem(LSP);
 
-					//var keys = JSON.parse(localStorage.getItem(LSP));
+					//var keys = JSON.parse(window.localStorage.getItem(LSP));
 					if (keys == null) {
 						keys = [];
-						localStorage.setItem(LSP, JSON.stringify(keys));
+						window.localStorage.setItem(LSP, JSON.stringify(keys));
 					}
 				}
 
@@ -31,9 +31,9 @@
 
 			function getPidStatus(request, sender, sendResponse) {
 				var pid = request.viewing;
-				console.log("getPidStatus pid: " + pid);
 
-				var pidStatus = localStorage[LSP+pid];
+				var pidStatus = getStatus(pid);
+				console.log("getPidStatus pid: " + pid + "/" + pidStatus);
 				if ((pidStatus == null) && (typeof(pid) != undefined)) {
 					saveStatus(pid, VIEWED);
 					sendResponse({status: "new"});
