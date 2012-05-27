@@ -15,15 +15,15 @@
 
 			function getPidStatus(request, sender, sendResponse) {
 				var pid = request.viewing;
+				console.log("getPidStatus pid: " + pid);
 
 				var pidStatus = localStorage[LSP+pid];
-				if (pidStatus == null) {
+				if ((pidStatus == null) && (typeof(pid) != undefined)) {
 					saveStatus(pid, VIEWED);
 					sendResponse({status: "new"});
 				} else if (pidStatus == VIEWED) {
 					sendResponse({status: VIEWED});
 				} else if (pidStatus == SAVED) {
-					//$("#saveBtn").button('loading');
 					sendResponse({status: SAVED});
 				}
 			}

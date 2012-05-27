@@ -18,38 +18,37 @@ $(function() {
 function updateStatus(status) {
 	if (status == VIEWED) {	
 		//if viewed, add a box over the content
-		$("body").append('<div id="viewed_alpha_box"/>');
-		$("#viewed_alpha_box").css("position", "fixed");
-		$("#viewed_alpha_box").css("top", "0");
-		$("#viewed_alpha_box").css("left", "0");
-		$("#viewed_alpha_box").css("width", "100%");
-		$("#viewed_alpha_box").css("height", "100%");
-		$("#viewed_alpha_box").css("background", "#6E6E6E");
-		$("#viewed_alpha_box").css("pointer-events", "none");
-		$("#viewed_alpha_box").css("z-index", "100");
-		$("#viewed_alpha_box").css("opacity", "0.3");
+		$("body").append('<div id="viewed_alpha_box" style="position:fixed; '+
+			'top:0; left:0; width:100%; height:100%; background:#6E6E6E; '+
+			'pointer-events:none; z-index:100; opacity:0.3;"/>');
 		//show popup
-		$("body").prepend('<div style="position:relative; top:0; left:0; '+
+		$("body").prepend('<div id="viewed_alert" style="position:relative; top:0; left:0; '+
 			'width:100%; height:30px; background-color:#ffc000; z-index:101;">'+
-		 	'<p style="position:absolute; width:100%; height:100%; '+
-		 	'display:table-cell; vertical-align:middle; text-align:center;">'+
+		 	'<p id="viewed_alert_text" style="position:absolute; width:100%; height:100%; '+
+		 	'display:table-cell; vertical-align:middle; text-align:center; '+
+		 	'font-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;">'+
 		 	'You have previously viewed this property and did not mark it'+
 		 	'</p></div>'
 		 );
+		$("#saved_alert").remove();
 	} else if (status == SAVED) {
-		$("body").prepend('<div style="position:relative; top:0; left:0; '+
-			'width:100%; height:30px; background-color:#ffc000; z-index:101;">'+
+		$("body").prepend('<div id="saved_alert" style="position:relative; top:0; left:0; '+
+			'width:100%; height:30px; background-color:#58FA58; z-index:101;">'+
 		 	'<p style="position:absolute; width:100%; height:100%; '+
-		 	'display:table-cell; vertical-align:middle; text-align:center;">'+
+		 	'display:table-cell; vertical-align:middle; text-align:center; '+
+		 	'font-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;">'+
 		 	'You have this property saved</p>'+
 		 	'</div>'
 		 );
+		$("#viewed_alpha_box").remove();
+		$("#viewed_alert").remove();
 	}
 }
 
 function updateStatusListener(request, sender, sendResponse) {
+	console.log(request.newStatus);
 	if (request.newStatus != null)
 		updateStatus(request.newStatus);
 }
 
-chrome.extensions.onRequest.addListener(updateStatusListener);
+chrome.extension.onRequest.addListener(updateStatusListener);
