@@ -11,31 +11,31 @@
 			var propertyDetailsUrl = "http://www.realtor.ca/propertyDetails.aspx?propertyId=";
 
 			$(function() {
-				var keys = JSON.parse(window.localStorage.getItem(LSP));
-				for (property in keys) {
-					var pid = keys[property];
-					//is it a saved property?
-					var prop = window.localStorage.getItem(LSP+pid);
-					if (prop == SAVED)
-						addPropertyToTable(pid);				
+				var saved = JSON.parse(window.localStorage.getItem(LSP+SAVED));
+				for (obj in saved) {
+					addPropertyToTable(saved[obj]);
 				}
 			});
 
-			function addPropertyToTable(pid) {
-				var url = propertyDetailsUrl+pid;
-				$("#propertyTable").append("<tr id=\"row_"+pid+"\"><td><a href=\""+url+"\">"+url+"</a></td><td><button id=\"delete_"+pid+"\" class=\"btn btn-inverse btn-mini\"><i class=\"icon-trash icon-white\"></i> Delete</button></td></tr>");
-				$("#delete_"+pid).click(function() {
-					saveStatus(pid, VIEWED);
-					$("#row_"+pid).remove();
-				})
+			function addPropertyToTable(obj) {
+				var url = propertyDetailsUrl+obj.pid;
+				var rowDiv = "<div class='row'></div>";
+				var addressDiv = "<div id='address' class='span8'><h3><a href='"+url+"' target='_blank'>"+obj.address+"</a></h3></div>";
+				var priceDiv = "<div id='price' class='span4'><p>"+obj.price+"</p></div>";
+				var imgDiv = "<div id='img' class='span3'><img src='"+obj.imgUrl+"'/></div>";
+				var descDiv = "<div id='desc' class='span9'><p>"+obj.description+"</p></div>";
+
+				var topRow = "<div class='row'>"+addressDiv+priceDiv+"</div>";
+				var bottomRow = "<div class='row'>"+imgDiv+descDiv+"</div><br/>";
+
+				$("#main").append(topRow+bottomRow);
 			}
 
 		</script>
 	</head>
 	<body>
-		<h2>Property List</h2>
-		<table id="propertyTable">
-
-		</table>
+		<div id="main" class="container">
+			<div class='row'><div class='span12'><h1>Property List</h1></div></div><br/>
+		</div>
 	</body>
 </html>

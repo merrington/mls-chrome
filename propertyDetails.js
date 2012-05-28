@@ -48,9 +48,24 @@ function updateStatus(status) {
 }
 
 function updateStatusListener(request, sender, sendResponse) {
-	console.log(request.newStatus);
-	if (request.newStatus != null)
+	if (request.newStatus != null) {
+		console.log(request.newStatus);
 		updateStatus(request.newStatus);
+	}
+}
+
+function buildObject(request, sender, sendResponse) {
+	if (request.buildObject != null) {
+		var obj = {};
+		obj.pid = request.buildObject;
+		obj.imgUrl = $("#_ctl0_imgHouse").attr('src');
+		obj.description = $("div.PropDetailsRemarksValue").first().text();
+		obj.address = $("#_ctl0_elLocationMap1_lblAddress").text();
+		obj.price = $("td.MainHeadingRight").first().children("span").first().text();
+
+		sendResponse({object: obj});
+	}
 }
 
 chrome.extension.onRequest.addListener(updateStatusListener);
+chrome.extension.onRequest.addListener(buildObject);

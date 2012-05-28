@@ -19,6 +19,13 @@
 						keys = [];
 						window.localStorage.setItem(LSP, JSON.stringify(keys));
 					}
+
+					var savedObj = window.localStorage.getItem(LSP+SAVED);
+
+					if ((savedObj == null) || (typeof(savedObj == undefined)) || (savedObj == "null")) {
+						savedObj = [];
+						window.localStorage.setItem(LSP+SAVED, JSON.stringify(savedObj));
+					}
 				}
 
 			});
