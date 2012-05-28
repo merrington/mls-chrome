@@ -18,9 +18,9 @@ Easily keep track of properties you've looked at and are interested in.
 	- Web-based storage? (Sync across browsers)
 
 ## Uses
-- [jQuery](www.jquery.com)
+- [jQuery](http://www.jquery.com)
 - HTML5 (Local storage)
-- [Bootstrap](twitter.github.com/bootstrap/)
+- [Bootstrap](http://www.twitter.github.com/bootstrap/)
 
 ### Disclaimer (?)
 Not affiliated with MLS&copy;, Multiple Listing Service&copy;, Canadian Real Estate Association, REALTOR&copy; or REALTORS&copy;
