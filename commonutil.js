@@ -13,9 +13,12 @@ function saveStatus(pid, status) {
 
 	if (status == SAVED) {
 		window.localStorage.setItem((LSP + pid), status);
+		setSavedPid(pid);
 	}
-	else if (status == VIEWED)
+	else if (status == VIEWED) {
 		window.localStorage.removeItem(LSP + pid);
+		removeSavedPid(pid);
+	}
 
 	chrome.tabs.getSelected(null, function(tab) {
 		chrome.tabs.sendRequest(tab.id, {newStatus: status});	//don't send any response to this, all scripts need to get this update
@@ -30,14 +33,37 @@ function getStatus(pid) {
 	return window.localStorage.getItem(LSP+pid);
 }
 
-/*
-keys = {
-	"keys": [
-		{_pid_: "true"}
+function setSavedPid(pid) {
+	//get the current tab
+	chrome.tabs.getSelected(null, function(tab) {
+		chrome.tabs.sendRequest(tab.id, {buildObject: pid}, function(response) {
+			var obj = response.object;
+			var savedList = JSON.parse(window.localStorage.getItem(LSP+SAVED));
+			savedList.push(obj);
+			window.localStorage.setItem(LSP+SAVED, JSON.stringify(savedList));
+		});
+	});
+}
 
-		{"item": _pid_},
-		{"item": _pid2_},
-		...
-	]
-};
+function removeSavedPid(pid) {
+	var savedList = JSON.parse(window.localStorage.getItem(LSP+SAVED));
+	for (obj in savedList) {
+		if (savedList[obj].pid == pid) {
+			savedList.splice(obj,1);
+		}
+
+	}
+}
+
+/*
+keys = []
+
+savedPid = {
+	"id" : _pid_,
+	"imgUrl" : _imgUrl_,
+	"description" : _desc_,
+	"address" : _addr_,
+	"price" : _price_,
+	"notes" : _notes_ 		//coming later
+}
 */
