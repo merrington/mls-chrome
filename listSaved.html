@@ -15,6 +15,7 @@
 				for (obj in saved) {
 					addPropertyToTable(saved[obj]);
 				}
+				$("#count").prepend(saved.length);
 			});
 
 			function addPropertyToTable(obj) {
@@ -30,7 +31,7 @@
 				var topRow = "<div class='row'>"+addressDiv+priceDiv+deleteDiv+"</div>";
 				var bottomRow = "<div class='row'>"+imgDiv+descDiv+"</div><br/>";
 
-				$("#main").append(topRow+bottomRow);
+				$("#list").prepend(topRow+bottomRow);
 
 				$("#delete_"+obj.pid).click(function() {
 					removeSavedPid(obj.pid);
@@ -42,7 +43,9 @@
 	</head>
 	<body>
 		<div id="main" class="container">
-			<div class='row'><div class='span12'><h1>Property List</h1></div></div><br/>
+			<div id="title" class='row'><div class='span12'><h1>Property List</h1></div></div>
+			<div id="list"></div>
+			<div class='row'><div class='span12'><h2 id="count"> properties saved</h2></div></div><br/>
 		</div>
 	</body>
 </html>
