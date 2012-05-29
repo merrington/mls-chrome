@@ -16,7 +16,6 @@ function saveStatus(pid, status) {
 		setSavedPid(pid);
 	}
 	else if (status == VIEWED) {
-		window.localStorage.removeItem(LSP + pid);
 		removeSavedPid(pid);
 	}
 
@@ -46,13 +45,17 @@ function setSavedPid(pid) {
 }
 
 function removeSavedPid(pid) {
+	//remove the property from general saved list
+	window.localStorage.removeItem(LSP + pid);
+
+	//remove the property object
 	var savedList = JSON.parse(window.localStorage.getItem(LSP+SAVED));
 	for (obj in savedList) {
 		if (savedList[obj].pid == pid) {
 			savedList.splice(obj,1);
 		}
-
 	}
+	window.localStorage.setItem(LSP+SAVED, JSON.stringify(savedList));
 }
 
 /*

@@ -61,7 +61,8 @@ function buildObject(request, sender, sendResponse) {
 		obj.imgUrl = $("#_ctl0_imgHouse").attr('src');
 		obj.description = $("div.PropDetailsRemarksValue").first().text();
 		obj.address = $("#_ctl0_elLocationMap1_lblAddress").text();
-		obj.price = $("td.MainHeadingRight").first().children("span").first().text();
+		var price = $("td.MainHeadingRight").first().find($("span")).first().text().trim();
+		obj.price = price.substring(price.indexOf(": ")+2, price.length);
 
 		sendResponse({object: obj});
 	}

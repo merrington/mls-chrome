@@ -19,16 +19,23 @@
 
 			function addPropertyToTable(obj) {
 				var url = propertyDetailsUrl+obj.pid;
+				var deleteDiv = "<div id='delete' class='span2'><button id=\"delete_"+obj.pid+"\" class=\"btn btn-inverse btn-mini\"><i class=\"icon-trash icon-white\"></i> Delete</button></div>";
+				
 				var rowDiv = "<div class='row'></div>";
-				var addressDiv = "<div id='address' class='span8'><h3><a href='"+url+"' target='_blank'>"+obj.address+"</a></h3></div>";
-				var priceDiv = "<div id='price' class='span4'><p>"+obj.price+"</p></div>";
+				var addressDiv = "<div id='address' class='span7'><h3><a href='"+url+"' target='_blank'>"+obj.address+"</a></h3></div>";
+				var priceDiv = "<div id='price' class='span3'><h3>"+obj.price+"</h3></div>";
 				var imgDiv = "<div id='img' class='span3'><img src='"+obj.imgUrl+"'/></div>";
 				var descDiv = "<div id='desc' class='span9'><p>"+obj.description+"</p></div>";
 
-				var topRow = "<div class='row'>"+addressDiv+priceDiv+"</div>";
+				var topRow = "<div class='row'>"+addressDiv+priceDiv+deleteDiv+"</div>";
 				var bottomRow = "<div class='row'>"+imgDiv+descDiv+"</div><br/>";
 
 				$("#main").append(topRow+bottomRow);
+
+				$("#delete_"+obj.pid).click(function() {
+					removeSavedPid(obj.pid);
+					chrome.tabs.reload();
+				});
 			}
 
 		</script>
