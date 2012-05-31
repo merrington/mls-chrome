@@ -1,6 +1,13 @@
 var VIEWED = "viewed";
 var SAVED = "saved";
 
+//inject bootstrap css
+var style = document.createElement('link');
+style.rel = "stylesheet";
+style.type = "text/css";
+style.href = chrome.extension.getURL("css/bootstrap.min.css");
+document.head.appendChild(style);
+
 $(function() {
 	//get the ID of the property
 	var action = $("#frmMain").attr("action");
@@ -24,27 +31,35 @@ function updateStatus(status) {
 			'top:0; left:0; width:100%; height:100%; background:#6E6E6E; '+
 			'pointer-events:none; z-index:100; opacity:0.3;"/>');
 		//show popup
-		$("body").prepend('<div id="viewed_alert" style="position:relative; top:0; left:0; '+
-			'width:100%; height:30px; background-color:#ffc000; z-index:101;">'+
-		 	'<p id="viewed_alert_text" style="position:absolute; width:100%; height:100%; '+
-		 	'display:table-cell; vertical-align:middle; text-align:center; '+
-		 	'font-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;">'+
+		$("body").prepend('<div id="viewed_alert" style="position:relative; top:0; left:10%; '+
+			'width:80%; height:30px; background-color:#ffc000; z-index:101; '+
+			'-webkit-border-bottom-left-radius:15px; -webkit-border-bottom-right-radius:15px;">'+
+		 	'<h4 id="viewed_alert_text" style="position:absolute; width:100%; height:100%; '+
+		 	'display:table-cell; vertical-align:middle; text-align:center;">'+
 		 	'You have previously viewed this property and did not mark it'+
-		 	'</p></div>'
+		 	'</h4>'+
+		 	'<p style="position:absolute; top:5; right:10;"><button class="btn btn-mini btn-inverse" id="close_popup"><i class="icon-remove icon-white"></i> </button></p></div>'
 		 );
 		$("#saved_alert").remove();
 	} else if (status == SAVED) {
-		$("body").prepend('<div id="saved_alert" style="position:relative; top:0; left:0; '+
-			'width:100%; height:30px; background-color:#58FA58; z-index:101;">'+
-		 	'<p style="position:absolute; width:100%; height:100%; '+
-		 	'display:table-cell; vertical-align:middle; text-align:center; '+
-		 	'font-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;">'+
-		 	'You have this property saved</p>'+
+		$("body").prepend('<div id="saved_alert" style="position:relative; top:0; left:10%; '+
+			'width:80%; height:30px; background-color:#58FA58; z-index:101; '+
+			'-webkit-border-bottom-left-radius:15px; -webkit-border-bottom-right-radius:15px;">'+
+		 	'<h4 style="position:absolute; width:100%; height:100%; '+
+		 	'display:table-cell; vertical-align:middle; text-align:center;">'+
+		 	'You have this property saved</h4>'+
+		 	'<p style="position:absolute; top:5; right:10;"><button class="btn btn-mini btn-inverse" id="close_popup"><i class="icon-remove icon-white"></i> </button></p>'+
 		 	'</div>'
 		 );
 		$("#viewed_alpha_box").remove();
 		$("#viewed_alert").remove();
 	}
+
+	$("#close_popup").click(function() {
+		$("#viewed_alpha_box").remove();
+		$("#viewed_alert").remove();
+		$("#saved_alert").remove();
+	});
 }
 
 function updateStatusListener(request, sender, sendResponse) {
