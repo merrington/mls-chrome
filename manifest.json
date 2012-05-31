@@ -9,6 +9,10 @@
 		"matches": ["http://www.realtor.ca/propertyDetails.aspx?*"],
 		"js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "propertyDetails.js", "commonutil.js"],
 		"all_frames": true
+	}, {
+		"matches": ["http://www.realtor.ca/map.aspx?*"],
+		"js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "map.js", "commonutil.js"],
+		"run_at": "document_end"
 	}],
 	"page_action": {
 		"default_icon": "img/icon16.png",
